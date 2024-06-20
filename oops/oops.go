@@ -9,19 +9,11 @@ import (
 )
 
 func a() error {
-	err := b()
-	if err != nil {
-		return err
-	}
-	return nil
+	return oops.Wrap(b())
 }
 
 func b() error {
-	err := f("foo.txt")
-	if err != nil {
-		return err
-	}
-	return nil
+	return oops.Wrap(f("foo.txt"))
 }
 
 func f(file string) error {
@@ -37,17 +29,14 @@ func f(file string) error {
 }
 
 func c() error {
-	err := f("bar.txt")
-	if err != nil {
-		return err
-	}
-	return nil
+	return oops.Wrap(f("bar.txt"))
 }
 
 func main() {
 	// oops.SourceFragmentsHidden = false
 
-	fmt.Printf("a: %+v\n", a())
+	fmt.Printf("a: %+v\n\n", a())
+	fmt.Printf("c: %+v\n\n", c())
 
 	err := a()
 	slog.Error(err.Error(), slog.Any("error", err))
