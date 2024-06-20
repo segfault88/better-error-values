@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log/slog"
 	"os"
@@ -40,4 +41,12 @@ func main() {
 
 	err := a()
 	slog.Error(err.Error(), slog.Any("error", err))
+
+	fmt.Printf("\n\n\n")
+
+	if errors.Is(err, os.ErrNotExist) {
+		fmt.Printf("bad thing was file not found\n")
+	} else {
+		fmt.Printf("bad thing was some other thing\n")
+	}
 }
