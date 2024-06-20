@@ -30,7 +30,7 @@ func f(file string) error {
 }
 
 func c() error {
-	return oops.Wrap(f("bar.txt"))
+	return f("bar.txt")
 }
 
 func main() {
